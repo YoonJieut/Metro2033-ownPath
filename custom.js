@@ -1,3 +1,15 @@
+let trueBtn = document.getElementById('true');
+let falseBtn = document.getElementById('false');
+const body = document.body;
+console.dir(body);
+const root = document.getElementById('root');
+const container = document.getElementById('container');
+const textArea = document.getElementById('textArea');
+let textBox = document.getElementsByClassName('textBox');
+
+
+
+
 // !!!!대화 텍스트 
 const _textBook = [];
 const _textArtium = [];
@@ -54,8 +66,8 @@ const _animal = [
 
 
 // !!! 스토리 진행 로직
-const trueBtn = document.getElementById('true');
-const falseBtn = document.getElementById('false');
+
+
 // * 버튼이 눌리면 .btnActive class를 추가함
 trueBtn.addEventListener('click',function(){
   console.log(trueBtn);
@@ -65,6 +77,7 @@ falseBtn.addEventListener('click',function(){
   console.log(falseBtn);
   falseBtn.classList.toggle('btnActive');
 });
+
 
 // function Story(){
 //   if(){}
