@@ -30,16 +30,48 @@ const _animal = [
 ]
 
 
+
+
+
 //! 대화(#container) 창 종료 함수
 
 // ! 대화(#container) 창 생성 로직과 함수
 
+//! 문자열에 "."이 있으면 밑줄로 띄워주는 로직
+
+// ! textArea 안에 textBox 없애주는 로직
+// ? 부모만 없애도 다 없어질까? 그러진 않을 거 같은데... 큰일 났네
 
 // ! 해설 대사 함수
-
+// * textBox>.textBox
 
 // ! 주인공 대사 함수
 // * .textBox>.profi+.text
 
 // ! npc 대사 
 // * .textBox>.text+.profi
+
+
+
+// !!! 스토리 진행 로직
+const trueBtn = document.getElementById('true');
+const falseBtn = document.getElementById('false');
+// * 버튼이 눌리면 .btnActive class를 추가함
+trueBtn.addEventListener('click',function(){
+  console.log(trueBtn);
+  trueBtn.classList.toggle('btnActive');
+});
+falseBtn.addEventListener('click',function(){
+  console.log(falseBtn);
+  falseBtn.classList.toggle('btnActive');
+});
+
+// function Story(){
+//   if(){}
+//   else if(){
+
+//   }
+//   else{
+//     console.error('올바른 곳을 선택해주세요')
+//   }
+// }
