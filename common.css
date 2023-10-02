@@ -70,7 +70,7 @@ body {
 
 /* class별 꾸밈 세팅 */
 .textBox {
-  outline: 1px solid black;
+  
   display: flex;
   justify-content: space-between;
   margin-bottom: 2vw;
@@ -89,7 +89,7 @@ body {
   position: relative;
 }
 .profi >p {
-  outline: 1px solid black;
+  
   font-size: 0.7rem;
   font-weight: 700;
   letter-spacing: 1.2px;
@@ -98,7 +98,7 @@ body {
 .text {
   max-width: 88%;
   padding: 0.5vw;
-  outline: 1px solid black;
+  
   text-wrap: wrap;
   text-align: left;
   display: flex;
