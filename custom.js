@@ -1,7 +1,6 @@
 let trueBtn = document.getElementById('true');
 let falseBtn = document.getElementById('false');
 const body = document.body;
-console.dir(body);
 const root = document.getElementById('root');
 const container = document.getElementById('container');
 const textArea = document.getElementById('textArea');
