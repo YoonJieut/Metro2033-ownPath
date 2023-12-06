@@ -10,6 +10,7 @@ let textBox = document.getElementsByClassName('textBox');
 
 
 // !!!!대화 텍스트 
+
 const _textBook = [];
 const _textArtium = [];
 const _textSergey = [];
@@ -18,6 +19,7 @@ const _textYeof = [];
 
 
 // * 요소 추가 로직
+// 12/06 이거는 react로 쉽게 해결이 가능할 것 같다.
 // let newDiv = document.createElement('div');
 // newDiv.className = '대충 이름';
 // document.body.appendChild(newDiv);
