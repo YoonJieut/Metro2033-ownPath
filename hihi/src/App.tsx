@@ -1,21 +1,13 @@
 import React from 'react';
+import Test11 from './test';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    // container 생성해보기
+    <div>
+      <div id = "container">
+      </div>
+      <Test11/>
     </div>
   );
 }
