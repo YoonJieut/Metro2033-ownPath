@@ -57,13 +57,37 @@ async function displayScript(script: ScriptData[]): Promise<void> {
   });
 }
 
+
 function displayBranchButtons(): void {
-  // 나머지 코드는 동일하며, 필요한 경우 타입을 추가할 수 있습니다.
-  // ...
+  // 필요한 경우 타입을 추가할 수 있습니다.
+  const btn1 = document.createElement("button");
+  btn1.innerText = "분기 1로 가기";
+  btn1.onclick = async () => {
+    const { messages } = await import("../scriptData/data2-1.js");
+    container.innerHTML = '';  // 내용 초기화
+    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+    displayScript(messages);
+  }
+  
+  const btn2 = document.createElement("button");
+  btn2.innerText = "분기 2로 가기";
+  btn2.onclick = async () => {
+    const { messages } = await import("../scriptData/data2-2.js");
+    container.innerHTML = '';  // 내용 초기화
+    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+    displayScript(messages);
+  };
+
+  container.appendChild(btn1);
+  container.appendChild(btn2);
 }
 
 // 초기 로딩
 displayScript(messages);
 currentScriptIndex++;
 
+/**
+ * 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
+ * 단, 마지막에 다다르면 버튼을 생성한다.
+ */
 container.addEventListener('click', loadNextScript);
