@@ -1,7 +1,7 @@
 {
   "name": "metro2033-ownpath",
   "version": "1.0.0",
-  "description": "",
+  "description": "클릭하면 챗형식의 소설이 나타납니다.\r 그리고 일정 분기에서 사용자가 선택할 수 있는 프로그램입니다.",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/YoonJieut/Metro2033-ownPath/issues"
   },
-  "homepage": "https://github.com/YoonJieut/Metro2033-ownPath#readme"
+  "homepage": "https://github.com/YoonJieut/Metro2033-ownPath#readme",
+  "keywords": []
 }
