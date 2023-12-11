@@ -111,3 +111,8 @@ currentScriptIndex++;
 // 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
 // 단, 마지막에 다다르면 버튼을 생성한다.
 container.addEventListener('click', loadNextScript);
+
+
+// resetbutton
+const resetButton = createResetButton(displayScript);
+document.body.appendChild(resetButton);
