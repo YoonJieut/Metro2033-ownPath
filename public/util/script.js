@@ -29,7 +29,7 @@ async function loadNextScript() {
 }
 
 // 메세지 입력하는 함수
-async function displayScript(script) {
+function displayScript(script) {
     script.forEach(message => {
         const messageDiv = document.createElement('div');
         messageDiv.classList.add('message', message.type);
@@ -59,7 +59,7 @@ async function displayScript(script) {
 //버튼 생성 함수
 function displayBranchButtons() {
   const btn1 = document.createElement("button");
-  btn1.innerText = "분기 1로 가기";
+  btn1.innerText = "다시 길을 떠난다.";
   btn1.onclick = async () => {
     const { messages } = await import("../scriptData/data2-1.js");
     container.innerHTML = '';  // 내용 초기화
@@ -69,7 +69,7 @@ function displayBranchButtons() {
   };
 
   const btn2 = document.createElement("button");
-  btn2.innerText = "분기 2로 가기";
+  btn2.innerText = "도와달라고 요청한다.";
   btn2.onclick = async () => {
     const { messages } = await import("../scriptData/data2-2.js");
     container.innerHTML = '';  // 내용 초기화
@@ -77,8 +77,16 @@ function displayBranchButtons() {
     displayScript(messages);
   };
 
-  container.appendChild(btn1);
-  container.appendChild(btn2);
+  // flexDiv 생성
+  /**
+   * 정렬용 div를 생성합니다.
+   */
+  const flexDiv = document.createElement('div');
+  flexDiv.classList.add('flex');
+
+  container.appendChild(flexDiv);
+  flexDiv.appendChild(btn1);
+  flexDiv.appendChild(btn2);
 }
 
 // 초기 로딩 시 첫번째 스크립트 표시
