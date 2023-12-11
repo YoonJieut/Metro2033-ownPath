@@ -28,7 +28,7 @@ async function loadNextScript() {
   }
 }
 
-// 메세지 입력하는 함수
+// 메세지 생성하는 함수
 function displayScript(script) {
     script.forEach(message => {
         const messageDiv = document.createElement('div');
@@ -56,6 +56,7 @@ function displayScript(script) {
     });
 }
 
+// todo : 나중에 함수화 해서 버튼을 동적생성하자.
 //버튼 생성 함수
 function displayBranchButtons() {
   const btn1 = document.createElement("button");
@@ -65,7 +66,6 @@ function displayBranchButtons() {
     container.innerHTML = '';  // 내용 초기화
     container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
     displayScript(messages);
-
   };
 
   const btn2 = document.createElement("button");
@@ -88,6 +88,7 @@ function displayBranchButtons() {
   flexDiv.appendChild(btn1);
   flexDiv.appendChild(btn2);
 }
+
 
 // 초기 로딩 시 첫번째 스크립트 표시
 displayScript(messages);
