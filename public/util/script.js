@@ -61,13 +61,20 @@ function displayScript(script) {
 // todo : 나중에 함수화 해서 버튼을 동적생성하자.
 //버튼 생성 함수
 function displayBranchButtons(currentScriptIndex) {
+  currentScriptIndex = 0; // 인덱스 초기화
+
   const btn1 = document.createElement("button");
   btn1.innerText = "다시 길을 떠난다.";
   btn1.onclick = async () => {
-    const { messages } = await import("../scriptData/data2-1.js");
+    const { messages: branchMessages } = await import("../scriptData/data2-1.js");
     container.innerHTML = '';  // 내용 초기화
     container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
-    displayScript(messages);
+    displayScript(branchMessages);
+
+     // 그 후 data.js의 메시지를 표시하기 위해 currentScriptIndex를 0으로 설정하고 loadNextScript 호출
+    currentScriptIndex = 0;
+    await loadNextScript();  // 스크립트 처음부터 다시 로드
+
 
     // todo2를 이용한 로직
     // currentScriptIndex = 0;
@@ -101,7 +108,6 @@ function displayBranchButtons(currentScriptIndex) {
 // 초기 로딩 시 첫번째 스크립트 표시
 displayScript(messages);
 currentScriptIndex++;
-
 // 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
 // 단, 마지막에 다다르면 버튼을 생성한다.
 container.addEventListener('click', loadNextScript);
