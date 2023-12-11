@@ -1,15 +1,17 @@
 import { messages } from "../scriptData/data.js";
+import { initScriptIndexAndAddEvent } from "./initLogic.js";
 
 const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
-const container = document.querySelector(".container");
+export const container = document.querySelector(".container");
 
+//todo4 : currentScriptIndex를 다루는 클로져함수가 필요할 거 같다.
 let currentScriptIndex = 0;
 
 
 // 다음 스크립트를 await로 import하는 방식의 모듈화
 // addEventListener의 비동기를 빼주고 여기에 몰빵하여
 // async를 최대한 컨트롤해본다.
-async function loadNextScript() {
+export async function loadNextScript() {
   container.innerHTML = '';  // 내용 초기화
   container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
   if (currentScriptIndex < scriptOrder.length) {
@@ -58,7 +60,7 @@ function displayScript(script) {
 
 // todo : 나중에 함수화 해서 버튼을 동적생성하자.
 //버튼 생성 함수
-function displayBranchButtons() {
+function displayBranchButtons(currentScriptIndex) {
   const btn1 = document.createElement("button");
   btn1.innerText = "다시 길을 떠난다.";
   btn1.onclick = async () => {
@@ -66,6 +68,10 @@ function displayBranchButtons() {
     container.innerHTML = '';  // 내용 초기화
     container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
     displayScript(messages);
+
+    // todo2를 이용한 로직
+    currentScriptIndex = 0;
+    container.addEventListener('click', loadNextScript)
   };
 
   const btn2 = document.createElement("button");
