@@ -70,8 +70,10 @@ function displayBranchButtons(currentScriptIndex) {
     displayScript(messages);
 
     // todo2를 이용한 로직
-    currentScriptIndex = 0;
-    container.addEventListener('click', loadNextScript)
+    // currentScriptIndex = 0;
+    // const scriptName = scriptOrder[currentScriptIndex];
+    //   const { messages } = await import(`../scriptData/${scriptName}.js`);
+    // container.addEventListener('click', loadNextScript)
   };
 
   const btn2 = document.createElement("button");
