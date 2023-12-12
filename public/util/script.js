@@ -8,6 +8,11 @@ export const container = document.querySelector(".container");
 let currentScriptIndex = 0;
 
 
+function initScroll(){
+  container.innerHTML = '';  // 내용 초기화
+  container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+}
+
 // 다음 스크립트를 await로 import하는 방식의 모듈화
 // addEventListener의 비동기를 빼주고 여기에 몰빵하여
 // async를 최대한 컨트롤해본다.
@@ -67,8 +72,7 @@ function displayBranchButtons(currentScriptIndex) {
   btn1.innerText = "다시 길을 떠난다.";
   btn1.onclick = async () => {
     const { messages: branchMessages } = await import("../scriptData/data2-1.js");
-    container.innerHTML = '';  // 내용 초기화
-    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+    initScroll();
     displayScript(branchMessages);
   };
 
@@ -76,10 +80,8 @@ function displayBranchButtons(currentScriptIndex) {
   btn2.innerText = "도와달라고 요청한다.";
   btn2.onclick = async () => {
     const { messages } = await import("../scriptData/data2-2.js");
-    container.innerHTML = '';  // 내용 초기화
-    container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+    initScroll();
     displayScript(messages);
-    container.appendChild(createResetButton());
   };
 
   // flexDiv 생성
