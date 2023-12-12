@@ -22,16 +22,15 @@ function initScroll(){
 async function loadNextScript() {
   initScroll();
   
-  if (currentScriptIndex < scriptOrder.length) {
-      const scriptName = scriptOrder[currentScriptIndex];
+  if (currentScriptIndex.getCount() < scriptOrder.length) {
+      const scriptName = scriptOrder[currentScriptIndex.getCount()];
       const { messages } = await import(`../scriptData/${scriptName}.js`);
       displayScript(messages);
       currentScriptIndex.increase();
-      console.log(currentScriptIndex.increase());
   }
   // 모든 스크립트가 표시되었다면 분기 선택 버튼 표시
-  else if (currentScriptIndex === scriptOrder.length) {
-    displayBranchButtons(currentScriptIndex);
+  else if (currentScriptIndex.getCount() === scriptOrder.length) {
+    displayBranchButtons();
 
     // 생성되고 이벤트 삭제
     // 이러면 닷시는 내용을 추가할 수 없게 되버린다. 나중에 삭제 요망
@@ -73,10 +72,17 @@ function displayBranchButtons() {
   const btn1 = document.createElement("button");
   btn1.innerText = "다시 길을 떠난다.";
   btn1.onclick = async () => {
-    const { messages: branchMessages } = await import("../scriptData/data2-1.js");
+    const { messages } = await import("../scriptData/data2-1.js");
     initScroll();
-    displayScript(branchMessages);
+    displayScript(messages);
 
+    // 의사코드 1. 변수를 초기화 한다.
+    // 의사코드 2. 꺼놓은 이벤트를 다시 키고
+    // 의사코드 3. loadNextScript를 실행한다.
+    //변수 초기화
+    currentScriptIndex.reset();
+    //처음 로직 실행
+    container.addEventListener('click', loadNextScript);
   };
 
   const btn2 = document.createElement("button");
@@ -85,6 +91,7 @@ function displayBranchButtons() {
     const { messages } = await import("../scriptData/data2-2.js");
     initScroll();
     displayScript(messages);
+    container.addEventListener('click', loadNextScript);
 
   };
 
@@ -103,7 +110,7 @@ function displayBranchButtons() {
 
 // 초기 로딩 시 첫번째 스크립트 표시
 displayScript(messages);
-currentScriptIndex++;
+currentScriptIndex.increase();
 // 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
 // 단, 마지막에 다다르면 버튼을 생성한다.
 container.addEventListener('click', loadNextScript);
