@@ -8,9 +8,9 @@ async function loadInitialScript() {
   displayScript(messages);  // displayScript 함수는 해당 모듈로 import 해야합니다.
 }
 
-export function createResetButton(displayScript) {
+export function createResetButton() {
   const resetButton = document.createElement("button");
   resetButton.innerText = "처음부터 다시 시작";
-  resetButton.onclick = () => loadInitialScript(displayScript);
+  resetButton.onclick = () => loadInitialScript();
   return resetButton;
 }

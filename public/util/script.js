@@ -1,4 +1,5 @@
 import { messages } from "../scriptData/data.js";
+import { createCounter } from "./initLogic.js";
 
 const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 export const container = document.querySelector(".container");
@@ -7,7 +8,7 @@ export const container = document.querySelector(".container");
 
 //todo4 : currentScriptIndex를 다루는 클로져함수가 필요할 거 같다.
 
-let currentScriptIndex = 0;
+let currentScriptIndex = createCounter();
 
 
 function initScroll(){
@@ -19,13 +20,14 @@ function initScroll(){
 // addEventListener의 비동기를 빼주고 여기에 몰빵하여
 // async를 최대한 컨트롤해본다.
 async function loadNextScript() {
-  container.innerHTML = '';  // 내용 초기화
-  container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
+  initScroll();
+  
   if (currentScriptIndex < scriptOrder.length) {
       const scriptName = scriptOrder[currentScriptIndex];
       const { messages } = await import(`../scriptData/${scriptName}.js`);
       displayScript(messages);
-      currentScriptIndex++;
+      currentScriptIndex.increase();
+      console.log(currentScriptIndex.increase());
   }
   // 모든 스크립트가 표시되었다면 분기 선택 버튼 표시
   else if (currentScriptIndex === scriptOrder.length) {
@@ -67,25 +69,23 @@ function displayScript(script) {
 
 // todo : 나중에 함수화 해서 버튼을 동적생성하자.
 //버튼 생성 함수
-function displayBranchButtons(currentScriptIndex) {
+function displayBranchButtons() {
   const btn1 = document.createElement("button");
   btn1.innerText = "다시 길을 떠난다.";
-  btn1.onclick = async (currentScriptIndex) => {
+  btn1.onclick = async () => {
     const { messages: branchMessages } = await import("../scriptData/data2-1.js");
     initScroll();
     displayScript(branchMessages);
 
-    currentScriptIndex = 0; // 인덱스 초기화
   };
 
   const btn2 = document.createElement("button");
   btn2.innerText = "도와달라고 요청한다.";
-  btn2.onclick = async (currentScriptIndex) => {
+  btn2.onclick = async () => {
     const { messages } = await import("../scriptData/data2-2.js");
     initScroll();
     displayScript(messages);
 
-    currentScriptIndex = 0; // 인덱스 초기화
   };
 
   // flexDiv 생성

@@ -5,7 +5,7 @@
 
 // todo2 : 자연스럽게 처음으로 돌아간다.
 // * 상태관리를 활용한 로직이 될 것 같다.
-exprot function createCounter () {
+export function createCounter () {
   let count = 0;
 
   return {
