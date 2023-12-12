@@ -1,18 +1,14 @@
 
-let test = 0;
 
-function closureFunc(){
+function closureTest (){
+    let count = 0;
+    console.log(count);
     return function(){
-        return test++
+        count++
+        return count
     }
 }
 
-console.log(test);
-console.log(closureFunc());
-console.log(test);
-console.log(closureFunc());
-console.log(test);
-console.log(closureFunc());
-console.log(test);
-console.log(closureFunc());
-console.log(test);
+closureTest();
+closureTest();
+closureTest();
