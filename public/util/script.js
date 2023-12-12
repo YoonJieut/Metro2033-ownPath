@@ -1,10 +1,12 @@
 import { messages } from "../scriptData/data.js";
-import { createResetButton } from "./resetBtn.js";
 
 const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 export const container = document.querySelector(".container");
 
+
+
 //todo4 : currentScriptIndex를 다루는 클로져함수가 필요할 거 같다.
+
 let currentScriptIndex = 0;
 
 
@@ -16,7 +18,7 @@ function initScroll(){
 // 다음 스크립트를 await로 import하는 방식의 모듈화
 // addEventListener의 비동기를 빼주고 여기에 몰빵하여
 // async를 최대한 컨트롤해본다.
-export async function loadNextScript() {
+async function loadNextScript() {
   container.innerHTML = '';  // 내용 초기화
   container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
   if (currentScriptIndex < scriptOrder.length) {
@@ -27,7 +29,7 @@ export async function loadNextScript() {
   }
   // 모든 스크립트가 표시되었다면 분기 선택 버튼 표시
   else if (currentScriptIndex === scriptOrder.length) {
-    displayBranchButtons();
+    displayBranchButtons(currentScriptIndex);
 
     // 생성되고 이벤트 삭제
     // 이러면 닷시는 내용을 추가할 수 없게 되버린다. 나중에 삭제 요망
@@ -66,22 +68,24 @@ function displayScript(script) {
 // todo : 나중에 함수화 해서 버튼을 동적생성하자.
 //버튼 생성 함수
 function displayBranchButtons(currentScriptIndex) {
-  currentScriptIndex = 0; // 인덱스 초기화
-
   const btn1 = document.createElement("button");
   btn1.innerText = "다시 길을 떠난다.";
-  btn1.onclick = async () => {
+  btn1.onclick = async (currentScriptIndex) => {
     const { messages: branchMessages } = await import("../scriptData/data2-1.js");
     initScroll();
     displayScript(branchMessages);
+
+    currentScriptIndex = 0; // 인덱스 초기화
   };
 
   const btn2 = document.createElement("button");
   btn2.innerText = "도와달라고 요청한다.";
-  btn2.onclick = async () => {
+  btn2.onclick = async (currentScriptIndex) => {
     const { messages } = await import("../scriptData/data2-2.js");
     initScroll();
     displayScript(messages);
+
+    currentScriptIndex = 0; // 인덱스 초기화
   };
 
   // flexDiv 생성
