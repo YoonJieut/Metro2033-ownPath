@@ -8,11 +8,11 @@ function closureFunc(){
 }
 
 console.log(test);
-console.log(closureFunc);
+console.log(closureFunc());
 console.log(test);
-console.log(closureFunc);
+console.log(closureFunc());
 console.log(test);
-console.log(closureFunc);
+console.log(closureFunc());
 console.log(test);
-console.log(closureFunc);
+console.log(closureFunc());
 console.log(test);
