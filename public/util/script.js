@@ -1,5 +1,5 @@
 import { messages } from "../scriptData/data.js";
-import { initScriptIndexAndAddEvent } from "./initLogic.js";
+import { createResetButton } from "./resetBtn.js";
 
 const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 export const container = document.querySelector(".container");
@@ -70,17 +70,6 @@ function displayBranchButtons(currentScriptIndex) {
     container.innerHTML = '';  // 내용 초기화
     container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
     displayScript(branchMessages);
-
-     // 그 후 data.js의 메시지를 표시하기 위해 currentScriptIndex를 0으로 설정하고 loadNextScript 호출
-    currentScriptIndex = 0;
-    await loadNextScript();  // 스크립트 처음부터 다시 로드
-
-
-    // todo2를 이용한 로직
-    // currentScriptIndex = 0;
-    // const scriptName = scriptOrder[currentScriptIndex];
-    //   const { messages } = await import(`../scriptData/${scriptName}.js`);
-    // container.addEventListener('click', loadNextScript)
   };
 
   const btn2 = document.createElement("button");
@@ -90,6 +79,7 @@ function displayBranchButtons(currentScriptIndex) {
     container.innerHTML = '';  // 내용 초기화
     container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
     displayScript(messages);
+    container.appendChild(createResetButton());
   };
 
   // flexDiv 생성
@@ -112,7 +102,3 @@ currentScriptIndex++;
 // 단, 마지막에 다다르면 버튼을 생성한다.
 container.addEventListener('click', loadNextScript);
 
-
-// resetbutton
-const resetButton = createResetButton(displayScript);
-document.body.appendChild(resetButton);
