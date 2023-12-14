@@ -15,8 +15,12 @@ export function createResetButton() {
   return resetButton;
 }
 
-// todo2 : 자연스럽게 처음으로 돌아간다.
-// * 상태관리를 활용한 로직이 될 것 같다.
+// // todo2 : 자연스럽게 처음으로 돌아간다.
+// // * 상태관리를 활용한 로직이 될 것 같다.
+// // todo4 : currentScriptIndex를 다루는 클로져함수가 필요할 거 같다.
+
+// * 상태관리하는 클로져 패턴으로 작성
+// dom에 직접적으로 이벤트를 넣어줄 때 사용하면 편할 것
 export function createCounter() {
   let count = 0;
 
@@ -36,5 +40,3 @@ export function createCounter() {
 }
 
 // todo3: container 스크롤이 바닥에 닿으면 처음으로 돌아간다.
-
-// todo5 :

@@ -4,8 +4,6 @@ import { createCounter } from "./initLogic.js";
 const scriptOrder = ["data", "data1-1", "data1-2", "data1-3"];
 export const container = document.querySelector(".container");
 
-//todo4 : currentScriptIndex를 다루는 클로져함수가 필요할 거 같다.
-
 let currentScriptIndex = createCounter();
 
 function initScroll() {
