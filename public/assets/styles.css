@@ -5,12 +5,18 @@ body {
   margin: 0;
   padding: 0;
   overflow-x: hidden; /* 좌우 스크롤 방지 */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 100vw;
+  height: 100vh;;
 }
 
 .container {
   width: 50vw;
   max-width: 600px;
-  margin: calc(50vh - 300px) auto; /* 화면 중앙에 위치시키기 위한 계산 */
   padding: 20px;
   border: 1px solid #ccc;
   background-color: #fff;
@@ -18,6 +24,36 @@ body {
   overflow-y: auto;
   height: 50vw;
   max-height: 600px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+  gap: 2vw;
+}
+
+button {
+  font-size: 16px;
+  font-weight: 600;
+  color: #fff;
+
+  flex : 1;
+  height: 50px;
+  border: 7px;
+  box-shadow: 3px 3px 5px #222;
+  background-color: #999;
+  transition: 0.5s all;
+}
+button:hover {
+  box-shadow: 3px 3px 5px #999;
+  background-color: #222;
 }
 
 /* 메시지 스타일 */
