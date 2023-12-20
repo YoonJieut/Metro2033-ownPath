@@ -1,20 +1,12 @@
 import { messages } from "../scriptData/data.js";
-import { createCounter } from "./initLogic.js";
+import { createCounter } from "./initLogic.js"; 
+import { initScroll } from "./initScroll.js"; 
 
 const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
-export const container = document.querySelector(".container");
-
-
-
-//todo4 : currentScriptIndex를 다루는 클로져함수가 필요할 거 같다.
+const container = document.querySelector(".container");
+console.log(container);
 
 let currentScriptIndex = createCounter();
-
-
-function initScroll(){
-  container.innerHTML = '';  // 내용 초기화
-  container.scrollTop = 0; // 스크롤 위치 맨 위로 설정
-}
 
 // 다음 스크립트를 await로 import하는 방식의 모듈화
 // addEventListener의 비동기를 빼주고 여기에 몰빵하여
