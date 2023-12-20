@@ -22,7 +22,19 @@ export function createCounter() {
   };
 }
 
-// todo3: container 스크롤이 바닥에 닿으면 처음으로 돌아간다. 
+// // todo3: container 스크롤이 바닥에 닿으면 처음으로 돌아간다. 
 // todo3-1 : 여기서 처음으로 돌아가는 건 , counter를 0으로 바꾸는 실행함수가 될 것 같다.
+// * 모듈로 부르는데 어떻게 메인에 있는 변수를 바꾸지?
+window.addEventListener('scroll', () => {
+  const scrollPosition = window.scrollY;
+  const windowHeight = window.innerHeight;
+  const documentHeight = document.documentElement.scrollHeight;
+
+  if (scrollPosition + windowHeight >= documentHeight) {
+    initScroll();
+  }
+});
+
+
 
 
