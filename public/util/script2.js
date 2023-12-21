@@ -11,8 +11,8 @@ let currentMessages = [];    // 현재 스크립트 파일의 메시지들
 
 async function loadNextScript() {
   if (currentMessageIndex < currentMessages.length) {
-    // 현재 스크립트 파일의 다음 메시지 표시
-    displayScript([currentMessages[currentMessageIndex]]);
+    // 현재 스크립트 파일의 다음 메시지를 기존 메시지들과 함께 표시
+    displayScript(currentMessages.slice(0, currentMessageIndex + 1));
     currentMessageIndex++;
   } else {
     // 현재 스크립트 파일의 마지막 메시지를 표시한 후
@@ -25,7 +25,6 @@ async function loadNextScript() {
       displayScript([currentMessages[currentMessageIndex]]);
       currentMessageIndex++;
       currentScriptIndex.increase();
-      initScroll();
     } else {
       // 모든 스크립트 파일을 표시한 경우
       displayBranchButtons();
@@ -33,6 +32,7 @@ async function loadNextScript() {
     }
   }
 }
+
 
 function displayScript(script) {
     container.innerHTML = ''; // 이전 메시지 지우기
