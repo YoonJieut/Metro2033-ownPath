@@ -6,23 +6,6 @@ const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 const container = document.querySelector(".container");
 let currentScriptIndex = createCounter();
 
-async function loadNextScript() {
-  initScroll();
-  
-  // 현재 인덱스가 스크립트 순서 배열의 길이보다 작을 경우
-  if (currentScriptIndex.getCount() < scriptOrder.length) {
-    const scriptName = scriptOrder[currentScriptIndex.getCount()];
-    const { messages } = await import(`../scriptData/${scriptName}.js`);
-    displayScript(messages);
-    currentScriptIndex.increase();
-  }
-  // 마지막 스크립트가 표시되었을 경우
-  else {
-    container.removeEventListener('click', loadNextScript);
-    displayBranchButtons();
-  }
-}
-
 let currentMessageIndex = 0; // 현재 메시지 인덱스
 let currentMessages = [];    // 현재 스크립트 파일의 메시지들
 
@@ -42,12 +25,41 @@ async function loadNextScript() {
       displayScript([currentMessages[currentMessageIndex]]);
       currentMessageIndex++;
       currentScriptIndex.increase();
+      initScroll();
     } else {
       // 모든 스크립트 파일을 표시한 경우
       displayBranchButtons();
       container.removeEventListener('click', loadNextScript);
     }
   }
+}
+
+function displayScript(script) {
+    container.innerHTML = ''; // 이전 메시지 지우기
+    script.forEach(message => {
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', message.type);
+
+      if (message.type === 'narration') {
+          const narrationText = document.createElement('div');
+          narrationText.classList.add('narration');
+          narrationText.innerText = message.text;
+          messageDiv.appendChild(narrationText);
+      } else {
+          const profileDiv = document.createElement('div');
+          profileDiv.classList.add('profile');
+          profileDiv.innerText = message.author[0];
+
+          const textBox = document.createElement('div');
+          textBox.classList.add('text-box');
+          textBox.innerText = message.text;
+
+          messageDiv.appendChild(profileDiv);
+          messageDiv.appendChild(textBox);
+      }
+
+      container.appendChild(messageDiv);
+    });
 }
 
 function displayBranchButtons() {
@@ -87,7 +99,7 @@ function displayBranchButtons() {
 }
 
 // 초기 로딩 시 첫번째 스크립트 표시
-displayScript(messages);
+// displayScript(messages);
 
 // 컨테이너 클릭시 다음 스크립트로 넘어가는 이벤트 설정
 container.addEventListener('click', loadNextScript);
