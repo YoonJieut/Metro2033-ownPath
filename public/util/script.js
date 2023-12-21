@@ -4,63 +4,68 @@ import { initScroll } from "./initScroll.js";
 
 const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 const container = document.querySelector(".container");
-console.log(container);
-
 let currentScriptIndex = createCounter();
 
-// 다음 스크립트를 await로 import하는 방식의 모듈화
-// addEventListener의 비동기를 빼주고 여기에 몰빵하여
-// async를 최대한 컨트롤해본다.
+let currentMessageIndex = 0; // 현재 메시지 인덱스
+let currentMessages = [];    // 현재 스크립트 파일의 메시지들
+
 async function loadNextScript() {
-  initScroll();
-  
-  if (currentScriptIndex.getCount() < scriptOrder.length) {
+  if (currentMessageIndex < currentMessages.length) {
+    // 현재 스크립트 파일의 다음 메시지를 기존 메시지들과 함께 표시
+    // * 슬라이스를 통한 배열 복사 표현이다.
+    displayScript(currentMessages.slice(0, currentMessageIndex + 1));
+    currentMessageIndex++;
+  } else {
+    // 현재 스크립트 파일의 마지막 메시지를 표시한 후
+    if (currentScriptIndex.getCount() < scriptOrder.length) {
+      // 다음 스크립트 파일 로드
       const scriptName = scriptOrder[currentScriptIndex.getCount()];
       const { messages } = await import(`../scriptData/${scriptName}.js`);
-      displayScript(messages);
+      currentMessages = messages;
+      currentMessageIndex = 0;
+      displayScript([currentMessages[currentMessageIndex]]);
+      currentMessageIndex++;
       currentScriptIndex.increase();
-  }
-  // 모든 스크립트가 표시되었다면 분기 선택 버튼 표시
-  else if (currentScriptIndex.getCount() === scriptOrder.length) {
-    displayBranchButtons();
-
-    // 생성되고 이벤트 삭제
-    // 이러면 닷시는 내용을 추가할 수 없게 되버린다. 나중에 삭제 요망
-    container.removeEventListener('click', loadNextScript)
+      checkScroll();
+    } else {
+      // 모든 스크립트 파일을 표시한 경우
+      displayBranchButtons();
+      container.removeEventListener('click', loadNextScript);
+    }
   }
 }
 
-// 메세지 생성하는 함수
+
 function displayScript(script) {
+    container.innerHTML = ''; // 이전 메시지 지우기
     script.forEach(message => {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message', message.type);
+      const messageDiv = document.createElement('div');
+      messageDiv.classList.add('message', message.type);
 
-        if (message.type === 'narration') {
-            const narrationText = document.createElement('div');
-            narrationText.classList.add('narration');
-            narrationText.innerText = message.text;
-            messageDiv.appendChild(narrationText);
-        } else {
-            const profileDiv = document.createElement('div');
-            profileDiv.classList.add('profile');
-            profileDiv.innerText = message.author[0];
+      if (message.type === 'narration') {
+          const narrationText = document.createElement('div');
+          narrationText.classList.add('narration');
+          narrationText.innerText = message.text;
+          messageDiv.appendChild(narrationText);
+      } else {
+          const profileDiv = document.createElement('div');
+          profileDiv.classList.add('profile');
+          profileDiv.innerText = message.author[0];
 
-            const textBox = document.createElement('div');
-            textBox.classList.add('text-box');
-            textBox.innerText = message.text;
+          const textBox = document.createElement('div');
+          textBox.classList.add('text-box');
+          textBox.innerText = message.text;
 
-            messageDiv.appendChild(profileDiv);
-            messageDiv.appendChild(textBox);
-        }
+          messageDiv.appendChild(profileDiv);
+          messageDiv.appendChild(textBox);
+      }
 
-        container.appendChild(messageDiv);
+      container.appendChild(messageDiv);
     });
 }
 
-// todo : 나중에 함수화 해서 버튼을 동적생성하자.
-//버튼 생성 함수
 function displayBranchButtons() {
+  // 버튼 생성 로직 (기존 코드와 동일)
   const btn1 = document.createElement("button");
   btn1.innerText = "다시 길을 떠난다.";
   btn1.onclick = async () => {
@@ -87,24 +92,21 @@ function displayBranchButtons() {
 
   };
 
-  // flexDiv 생성
-  /**
-   * 정렬용 div를 생성합니다.
-   */
+  // 버튼을 담을 flex div 생성
   const flexDiv = document.createElement('div');
   flexDiv.classList.add('flex');
-
   container.appendChild(flexDiv);
   flexDiv.appendChild(btn1);
   flexDiv.appendChild(btn2);
 }
 
+function checkScroll() {
+  if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
+    container.scrollTop = container.scrollHeight;
+    console.log('scroll to bottom');  
+  }
+}
 
-// 초기 로딩 시 첫번째 스크립트 표시
-displayScript(messages);
-currentScriptIndex.increase();
-// 컨테이너 클릭시 다음으로 넘어가는 이벤트 설정
-// 단, 마지막에 다다르면 버튼을 생성한다.
+
+// 컨테이너 클릭시 다음 스크립트로 넘어가는 이벤트 설정
 container.addEventListener('click', loadNextScript);
-
-
