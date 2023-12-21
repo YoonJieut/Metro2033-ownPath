@@ -26,7 +26,6 @@ async function loadNextScript() {
       displayScript([currentMessages[currentMessageIndex]]);
       currentMessageIndex++;
       currentScriptIndex.increase();
-      checkScroll();
     } else {
       // 모든 스크립트 파일을 표시한 경우
       displayBranchButtons();
@@ -100,12 +99,7 @@ function displayBranchButtons() {
   flexDiv.appendChild(btn2);
 }
 
-function checkScroll() {
-  if (container.scrollTop + container.clientHeight >= container.scrollHeight) {
-    container.scrollTop = container.scrollHeight;
-    console.log('scroll to bottom');  
-  }
-}
+
 
 
 // 컨테이너 클릭시 다음 스크립트로 넘어가는 이벤트 설정
