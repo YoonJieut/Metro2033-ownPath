@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/YoonJieut/Metro2033-ownPath/issues"
   },
-  "homepage": "https://github.com/YoonJieut/Metro2033-ownPath#readme"
+  "homepage": "https://github.com/YoonJieut/Metro2033-ownPath#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
 }
