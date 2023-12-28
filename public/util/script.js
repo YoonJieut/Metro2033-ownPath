@@ -14,6 +14,7 @@ async function loadNextScript() {
     // 현재 스크립트 파일의 다음 메시지를 기존 메시지들과 함께 표시
     // * 슬라이스를 통한 배열 복사 표현이다.
     displayScript(currentMessages.slice(0, currentMessageIndex + 1));
+    container.scrollTop = container.scrollHeight;
     currentMessageIndex++;
   } else {
     // 현재 스크립트 파일의 마지막 메시지를 표시한 후
