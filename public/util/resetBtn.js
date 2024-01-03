@@ -1,6 +1,6 @@
 
 
-async function loadInitialScript() {
+export async function loadInitialScript() {
   const { messages } = await import("../scriptData/data.js");
   const container = document.querySelector(".container");
   container.innerHTML = '';
@@ -8,7 +8,9 @@ async function loadInitialScript() {
   displayScript(messages);  // displayScript 함수는 해당 모듈로 import 해야합니다.
 }
 
+
 export function createResetButton() {
+  console.log("createResetButton");
   const resetButton = document.createElement("button");
   resetButton.innerText = "처음부터 다시 시작";
   resetButton.onclick = () => loadInitialScript();

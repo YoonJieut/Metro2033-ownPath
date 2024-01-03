@@ -1,6 +1,7 @@
-import { messages } from "../scriptData/data.js";
+// import { messages } from "../scriptData/data.js";
 import { createCounter } from "./initLogic.js"; 
 import { initScroll } from "./initScroll.js"; 
+import { createResetButton } from "./resetBtn.js";
 
 const scriptOrder = ['data', 'data1-1', 'data1-2', 'data1-3'];
 const container = document.querySelector(".container");
@@ -29,7 +30,11 @@ async function loadNextScript() {
       currentScriptIndex.increase();
     } else {
       // 모든 스크립트 파일을 표시한 경우
-      displayBranchButtons();
+      // displayBranchButtons();
+
+      // initBtn 테스트
+      container.appendChild(createResetButton());
+      
       container.removeEventListener('click', loadNextScript);
     }
   }
